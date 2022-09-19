@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="default" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Kibana常用命令 | Unravely</title><meta name="keywords" content="ElasticSearch"><meta name="author" content="一只草履虫"><meta name="copyright" content="一只草履虫"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="新建一条记录的话就用post更新一条记录的话就用put  POST和PUT区别1.更新：PUT会将新的json值完全替换掉旧的；而POST方式只会更新相同字段的值，其他数据不会改变，新提交的字段若不存在则增加。 2.PUT和DELETE操作是幂等的。所谓幂等是指不管进行多少次操作，结果都一样。比如用PUT修改一篇文章，然后在做同样的操作，每次操作后的结果并没有什么不同，DELETE也是一样。 3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kibana常用命令">
+<meta property="og:url" content="http://example.com/2022/07/28/38.Kibana%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Unravely">
+<meta property="og:description" content="新建一条记录的话就用post更新一条记录的话就用put  POST和PUT区别1.更新：PUT会将新的json值完全替换掉旧的；而POST方式只会更新相同字段的值，其他数据不会改变，新提交的字段若不存在则增加。 2.PUT和DELETE操作是幂等的。所谓幂等是指不管进行多少次操作，结果都一样。比如用PUT修改一篇文章，然后在做同样的操作，每次操作后的结果并没有什么不同，DELETE也是一样。 3">
+<meta property="og:locale">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-07-28T06:35:41.256Z">
+<meta property="article:modified_time" content="2022-09-19T10:41:41.489Z">
+<meta property="article:author" content="一只草履虫">
+<meta property="article:tag" content="ElasticSearch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="https://cdn.staticaly.com/gh/unravelyt/image-hosting/master/base_img/logo_y.webp"><link rel="canonical" href="http://example.com/2022/07/28/38.Kibana%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":700},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Kibana常用命令',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-19 18:41:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom-css/head.css"><meta name="generator" content="Hexo 6.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.staticaly.com/gh/unravelyt/image-hosting/master/base_img/avatar.4zr2jgjmhq80.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">53</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">62</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Unravely</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Kibana常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-07-28T06:35:41.256Z" title="Created 2022-07-28 14:35:41">2022-07-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-09-19T10:41:41.489Z" title="Updated 2022-09-19 18:41:41">2022-09-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/4-%E5%90%84%E7%A7%8D%E5%A4%87%E5%BF%98/">4.各种备忘</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>新建一条记录的话就用post<br>更新一条记录的话就用put</p>
+</blockquote>
+<h2 id="POST和PUT区别"><a href="#POST和PUT区别" class="headerlink" title="POST和PUT区别"></a>POST和PUT区别</h2><p>1.更新：PUT会将新的json值完全替换掉旧的；而POST方式只会更新相同字段的值，其他数据不会改变，新提交的字段若不存在则增加。</p>
+<p>2.PUT和DELETE操作是幂等的。所谓幂等是指不管进行多少次操作，结果都一样。比如用PUT修改一篇文章，然后在做同样的操作，每次操作后的结果并没有什么不同，DELETE也是一样。</p>
+<p>3.POST操作不是幂等的，比如常见的POST重复加载问题：当我们多次发出同样的POST请求后，其结果是创建了若干的资源。</p>
+<p>4.创建操作可以使用POST，也可以使用PUT，区别就在于POST是作用在一个集合资源(&#x2F;articles)之上的，而PUT操作是作用在一个具体资源之上的(&#x2F;articles&#x2F;123)。</p>
+<ul>
+<li>put需要精确到某一个资源文件，这样才能进行对数据的更新和创建操作；</li>
+<li>post能对整个资源集合进行操作，如果没有指定具体修改的文件id，那么post指令会自动生成一个唯一的id进行文件的创建，并将数据写入该文件中。如果指定了文件id，那么就会根据填写的参数对数据进行创建和更新操作；</li>
+</ul>
+<p>##1. 查看集群的健康情况</p>
+<p>GET &#x2F;_cat&#x2F;health?v</p>
+<p>##2. 查看节点的情况<br>GET &#x2F;_cat&#x2F;nodes?v</p>
+<p>##3. 查询各个索引状态<br>GET &#x2F;_cat&#x2F;indices?v</p>
+<p>##4. 创建索引<br>PUT &#x2F;movie_index</p>
+<p>##5. 查看某一个索引的分片情况<br>GET &#x2F;_cat&#x2F;shards&#x2F;movie_index?v</p>
+<p>##6. 删除索引<br>DELETE &#x2F;movie_index</p>
+<p>##7. 创建文档<br>PUT &#x2F;movie_index&#x2F;movie&#x2F;1<br>{ “id”:100,<br>  “name”:”operation red sea”,<br>  “doubanScore”:8.5,<br>  “actorList”:[<br>  {“id”:1,”name”:”zhang yi”},<br>  {“id”:2,”name”:”hai qing”},<br>  {“id”:3,”name”:”zhang han yu”}<br>  ]<br>}</p>
+<p>PUT &#x2F;movie_index&#x2F;movie&#x2F;2<br>{<br>  “id”:200,<br>  “name”:”operation meigong river”,<br>  “doubanScore”:8.0,<br>  “actorList”:[<br>{“id”:3,”name”:”zhang han yu”}<br>]<br>}</p>
+<p>PUT &#x2F;movie_index&#x2F;movie&#x2F;3<br>{<br>  “id”:300,<br>  “name”:”incident red sea”,<br>  “doubanScore”:5.0,<br>  “actorList”:[<br>{“id”:4,”name”:”zhang san feng”}<br>]<br>}</p>
+<p>##8. 查询某一个索引中的全部文档<br>GET &#x2F;movie_index&#x2F;_search</p>
+<p>##9. 根据id查询某一个文档<br>GET &#x2F;movie_index&#x2F;movie&#x2F;3</p>
+<p>##10. 根据文档id，删除某一个文档<br>DELETE &#x2F;movie_index&#x2F;_doc&#x2F;3</p>
+<p>POST &#x2F;_forcemerge</p>
+<p>##11. put 对已经存在的文档进行替换(幂等性)<br>PUT &#x2F;movie_index&#x2F;_doc&#x2F;3<br>{<br>  “id”:300,<br>  “name”:”incident red sea”,<br>  “doubanScore”:5.0,<br>  “actorList”:[<br>{“id”:4,”name”:”zhang cuishan”}<br>]<br>}</p>
+<p>##12. post 进行新增操作，无法保证幂等性</p>
+<h3 id="1-根据主键保证幂等性"><a href="#1-根据主键保证幂等性" class="headerlink" title="1. 根据主键保证幂等性"></a>1. 根据主键保证幂等性</h3><p>POST &#x2F;movie_index&#x2F;_doc&#x2F;<br>{<br>  “id”:300,<br>  “name”:”incident red sea”,<br>  “doubanScore”:5.0,<br>  “actorList”:[<br>{“id”:4,”name”:”zhang cuishan111”}<br>]<br>}</p>
+<p>GET &#x2F;movie_index&#x2F;_search</p>
+<p>GET &#x2F;movie_index&#x2F;movie&#x2F;1</p>
+<p>POST &#x2F;movie_index&#x2F;movie&#x2F;1&#x2F;_update<br>{<br>  “doc”:  { “name”: “新的字段值” }<br>}</p>
+<p>POST &#x2F;movie_index&#x2F;_update_by_query<br>{<br>    “query”: {<br>      “match”:{<br>        “actorList.id”:1<br>      }<br>    },<br>    “script”: {<br>      “lang”: “painless”,<br>      “source”:”for(int i&#x3D;0;i&lt;ctx._source.actorList.length;i++){if(ctx._source.actorList[i].id&#x3D;&#x3D;3){ctx._source.actorList[i].name&#x3D;’tttt’}}”<br>    }<br>}</p>
+<p>GET &#x2F;movie_index&#x2F;_search</p>
+<p>POST &#x2F;movie_index&#x2F;_delete_by_query<br>{<br>  “query”: {<br>    “match_all”: {}<br>  }<br>}</p>
+<h3 id="2-批量添加两个document"><a href="#2-批量添加两个document" class="headerlink" title="2. 批量添加两个document"></a>2. 批量添加两个document</h3><p>POST &#x2F;movie_index&#x2F;movie&#x2F;_bulk<br>{“index”:{“_id”:66}}<br>{“id”:300,”name”:”incident red sea”,”doubanScore”:5.0,”actorList”:[{“id”:4,”name”:”zhang cuishan”}]}<br>{“index”:{“_id”:88}}<br>{“id”:300,”name”:”incident red sea”,”doubanScore”:5.0,”actorList”:[{“id”:4,”name”:”zhang cuishan”}]}</p>
+<p>POST &#x2F;movie_index&#x2F;movie&#x2F;_bulk<br>{“update”:{“_id”:”66”}}<br>{“doc”: { “name”: “wudangshanshang” } }<br>{“delete”:{“_id”:”88”}}</p>
+<p>#——–查询操作——-<br>##1. 查询出当前索引中的全部数据<br>GET &#x2F;movie_index&#x2F;_search</p>
+<p>GET &#x2F;movie_index&#x2F;_search?q&#x3D;_id:66</p>
+<p>##2. 查询全部<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “match_all”: {}<br>  }<br>}</p>
+<p>##3. 根据电影的名称进行查询<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “match”: {<br>      “name”: “operation red sea”<br>    }<br>  }<br>}</p>
+<p>GET &#x2F;movie_index</p>
+<p>##4. 按分词进行查询<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “match”: {<br>      “actorList.name”: “zhang han yu”<br>    }<br>  }<br>}</p>
+<p>##5. 按短语查询  相当于like<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “match_phrase”: {<br>      “actorList.name”: “zhang han yu”<br>    }<br>  }<br>}</p>
+<p>##6. 不分词 通过精准匹配进行查询  term精准匹配<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “term”: {<br>       “actorList.name.keyword”:”zhang han yu”<br>    }<br>  }<br>}</p>
+<p>##7. 容错匹配（对于中文，实现并不太好）<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “fuzzy”: {<br>      “name”: “radd”<br>    }<br>  }<br>}</p>
+<p>##8. 先匹配 再过滤<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “match”: {<br>      “name”: “red”<br>    }<br>  },<br>  “post_filter”: {<br>    “term”: {<br>      “actorList.id”: “3”<br>    }<br>  }<br>}</p>
+<p>##9. 匹配和过滤同时（推荐使用）<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “bool”: {<br>      “must”: [<br>        {<br>          “match”: {<br>            “name”: “red”<br>          }<br>        }<br>      ],<br>      “filter”: {<br>        “term”: {<br>          “actorList.id”: “3”<br>        }<br>      }<br>    }<br>  }<br>}</p>
+<p>##10. 范围过滤  ，将豆瓣评分在6到9的文档查询出来<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “range”: {<br>      “doubanScore”: {<br>        “gte”: 6,<br>        “lte”: 9<br>      }<br>    }<br>  }<br>}</p>
+<p>##11. 按照豆瓣评分降序排序，并包含red<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “match”: {<br>      “name”: “red”<br>    }<br>  },<br>  “sort”: [<br>    {<br>      “doubanScore”: {<br>        “order”: “asc”<br>      }<br>    }<br>  ]<br>}</p>
+<p>##12. 分页查询，from从什么开始，size显示几条<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “from”: 0,<br>  “size”: 2<br>}</p>
+<p>##13. 查询指定字段<br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “_source”: [“name”, “doubanScore”]<br>}</p>
+<p>##14. 高亮显示，pre_tags设置标签，默认为<em><br>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “query”: {<br>    “match”: {<br>      “name”: “red”<br>    }<br>  },<br>  “highlight”: {<br>    “fields”:  {“name”:{} },<br>    “pre_tags”: “<a>“,<br>    “post_tags”: “</a>“<br>  }<br>}</p>
+<p>##15. 需求1：取出每个演员共参演了多少部电影</p>
+<h3 id="aggs-聚合"><a href="#aggs-聚合" class="headerlink" title="aggs 聚合"></a>aggs 聚合</h3><h3 id="term-精准匹配"><a href="#term-精准匹配" class="headerlink" title="term  精准匹配"></a>term  精准匹配</h3><h3 id="terms-聚合操作，相当于groupBy"><a href="#terms-聚合操作，相当于groupBy" class="headerlink" title="terms 聚合操作，相当于groupBy"></a>terms 聚合操作，相当于groupBy</h3><h3 id="myAggs是聚合操作的名字，可以随意取"><a href="#myAggs是聚合操作的名字，可以随意取" class="headerlink" title="myAggs	是聚合操作的名字，可以随意取"></a>myAggs	是聚合操作的名字，可以随意取</h3><p>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “aggs”: {<br>    “myAggs”: {<br>      “terms”: {<br>        “field”: “actorList.name.keyword”,<br>        “size”: 10<br>      }<br>    }<br>  }<br>}</p>
+<p>##16. 需求2：每个演员参演电影的平均分是多少，并按评分排序</p>
+<p>GET &#x2F;movie_index&#x2F;_search<br>{<br>  “aggs”: {<br>    “groupByName”: {<br>      “terms”: {<br>        “field”: “actorList.name.keyword”,<br>        “size”: 10,<br>        “order”: {<br>          “avg_score”: “asc”<br>        }<br>      },<br>      “aggs”: {<br>        “avg_score”: {<br>          “avg”: {<br>            “field”: “doubanScore”<br>          }<br>        }<br>      }<br>    }<br>  }<br>}</p>
+<p>##17. 分词</p>
+<h3 id="1-英文默认分词规则"><a href="#1-英文默认分词规则" class="headerlink" title="1. 英文默认分词规则"></a>1. 英文默认分词规则</h3><p>GET &#x2F;_analyze<br>{<br>  “text”: “hello world”<br>}</p>
+<h3 id="2-中文默认分词规则"><a href="#2-中文默认分词规则" class="headerlink" title="2. 中文默认分词规则"></a>2. 中文默认分词规则</h3><p>GET &#x2F;_analyze<br>{<br>  “text”: “蓝瘦香菇”,<br>  “analyzer”: “ik_smart”<br>}</p>
+<p>GET &#x2F;_analyze<br>{<br>  “text”: “蓝瘦香菇”,<br>  “analyzer”: “ik_max_word”<br>}</p>
+<p>GET &#x2F;movie_index</p>
+<h3 id="3-自动定义mapping"><a href="#3-自动定义mapping" class="headerlink" title="3. 自动定义mapping"></a>3. 自动定义mapping</h3><p>PUT &#x2F;movie_chn_1&#x2F;movie&#x2F;1<br>{ “id”:1,<br>  “name”:”红海行动”,<br>  “doubanScore”:8.5,<br>  “actorList”:[<br>  {“id”:1,”name”:”张译”},<br>  {“id”:2,”name”:”海清”},<br>  {“id”:3,”name”:”张涵予”}<br> ]<br>}<br>PUT &#x2F;movie_chn_1&#x2F;movie&#x2F;2<br>{<br>  “id”:2,<br>  “name”:”湄公河行动”,<br>  “doubanScore”:8.0,<br>  “actorList”:[<br>{“id”:3,”name”:”张涵予”}<br>]<br>}</p>
+<p>PUT &#x2F;movie_chn_1&#x2F;movie&#x2F;3<br>{<br>  “id”:3,<br>  “name”:”红海事件”,<br>  “doubanScore”:5.0,<br>  “actorList”:[<br>{“id”:4,”name”:”张三丰”}<br>]<br>}</p>
+<p>GET &#x2F;movie_chn_1&#x2F;_search<br>{<br>  “query”: {<br>    “match”: {<br>      “name”: “海行”<br>    }<br>  }<br>}</p>
+<p>GET &#x2F;movie_chn_1&#x2F;_mapping</p>
+<p>##18. 自定义mapping<br>DELETE movie_chn_2</p>
+<p>PUT movie_chn_2<br>{<br>  “mappings”: {<br>    “movie”:{<br>      “properties”: {<br>        “id”:{<br>          “type”: “long”<br>        },<br>        “name”:{<br>          “type”: “keyword”<br>        },<br>        “doubanScore”:{<br>          “type”: “double”<br>        },<br>        “actorList”:{<br>          “properties”: {<br>            “id”:{<br>              “type”:”long”<br>            },<br>            “name”:{<br>              “type”:”keyword”<br>            }<br>          }<br>        }<br>      }<br>    }<br>  }<br>}</p>
+<p>PUT &#x2F;movie_chn_2&#x2F;movie&#x2F;1<br>{ “id”:1,<br>  “name”:”红海行动”,<br>  “doubanScore”:8.5,<br>  “actorList”:[<br>  {“id”:1,”name”:”张译”},<br>  {“id”:2,”name”:”海清”},<br>  {“id”:3,”name”:”张涵予”}<br> ]<br>}<br>PUT &#x2F;movie_chn_2&#x2F;movie&#x2F;2<br>{<br>  “id”:2,<br>  “name”:”湄公河行动”,<br>  “doubanScore”:8.0,<br>  “actorList”:[<br>{“id”:3,”name”:”张涵予”}<br>]<br>}</p>
+<p>PUT &#x2F;movie_chn_2&#x2F;movie&#x2F;3<br>{<br>  “id”:3,<br>  “name”:”红海事件”,<br>  “doubanScore”:5.0,<br>  “actorList”:[<br>{“id”:4,”name”:”张三丰”}<br>]<br>}</p>
+<p>GET &#x2F;movie_chn_2&#x2F;_mapping</p>
+<p>GET &#x2F;movie_chn_2&#x2F;_search<br>{<br>  “query”: {<br>    “match”: {<br>      “name”: “海行”<br>    }<br>  }<br>}</p>
+<p>POST &#x2F;_reindex<br>{<br>  “source”: {}<br>  , “dest”: {}<br>}</p>
+<p>##19. 创建索引  并指定别名<br>PUT movie_chn_3<br>{<br>  “aliases”: {<br>      “movie_chn_3_aliase”: {}<br>  },<br>  “mappings”: {<br>    “movie”:{<br>      “properties”: {<br>        “id”:{<br>          “type”: “long”<br>        },<br>        “name”:{<br>          “type”: “text”,<br>          “analyzer”: “ik_smart”<br>        },<br>        “doubanScore”:{<br>          “type”: “double”<br>        },<br>        “actorList”:{<br>          “properties”: {<br>            “id”:{<br>              “type”:”long”<br>            },<br>            “name”:{<br>              “type”:”keyword”<br>            }<br>          }<br>        }<br>      }<br>    }<br>  }<br>}</p>
+<p>GET &#x2F;_cat&#x2F;indices</p>
+<p>GET &#x2F;_cat&#x2F;aliases</p>
+<p>POST &#x2F;_aliases<br>{<br>  “actions”: [<br>    {<br>      “add”: {<br>        “index”: “movie_chn_3”,<br>        “alias”: “movie_chn_3_a2”<br>      }<br>    }<br>  ]<br>}</p>
+<p>GET &#x2F;movie_chn_3&#x2F;_search</p>
+<p>GET &#x2F;movie_chn_3_a2&#x2F;_search</p>
+<p>GET &#x2F;_cat&#x2F;aliases</p>
+<p>POST &#x2F;_aliases<br>{<br>  “actions”: [<br>    {<br>      “remove”: {“index”: “movie_chn_3”,”alias”: “movie_chn_3_a2”}<br>    }<br>  ]<br>}</p>
+<p>GET &#x2F;movie_chn_1&#x2F;_search</p>
+<p>GET &#x2F;movie_chn_2&#x2F;_search</p>
+<p>POST  _aliases<br>{<br>    “actions”: [<br>        { “add”:    { “index”: “movie_chn_1”, “alias”: “movie_chn_query” }},<br>        { “add”:    { “index”: “movie_chn_2”, “alias”: “movie_chn_query” }}<br>    ]<br>}</p>
+<p>GET &#x2F;movie_chn_query&#x2F;_search</p>
+<p>POST  _aliases<br>{<br>    “actions”: [<br>        {<br>          “add”:<br>          {<br>            “index”: “movie_chn_1”,<br>            “alias”: “movie_chn_1_sub_query”,<br>            “filter”: {<br>                “term”: {  “actorList.id”: “4”}<br>            }<br>          }<br>        }<br>    ]<br>}</p>
+<p>GET &#x2F;movie_chn_1_sub_query&#x2F;_search</p>
+<p>POST &#x2F;_aliases<br>{<br>    “actions”: [<br>        { “remove”: { “index”: “movie_chn_1”, “alias”: “movie_chn_query” }},<br>        { “remove”: { “index”: “movie_chn_2”, “alias”: “movie_chn_query” }},<br>        { “add”:    { “index”: “movie_chn_3”, “alias”: “movie_chn_query” }}<br>    ]<br>}</p>
+<p>##20. 创建模板<br>PUT _template&#x2F;template_movie0523<br>{<br>  “index_patterns”: [“movie_test*”],<br>  “settings”: {<br>    “number_of_shards”: 1<br>  },<br>  “aliases” : {<br>    “{index}-query”: {},<br>    “movie_test-query”:{}<br>  },<br>  “mappings”: {<br>    “_doc”: {<br>      “properties”: {<br>        “id”: {<br>          “type”: “keyword”<br>        },<br>        “movie_name”: {<br>          “type”: “text”,<br>          “analyzer”: “ik_smart”<br>        }<br>      }<br>    }<br>  }<br>}</p>
+<p>##21. 创建索引，并创建文档<br>POST movie_test_202010&#x2F;_doc<br>{<br>  “id”:”333”,<br>  “name”:”zhang3”<br>}</p>
+<p>GET &#x2F;movie_test_202010-query&#x2F;_mapping</p>
+<p>GET &#x2F;_cat&#x2F;templates</p>
+<p>GET &#x2F;_template&#x2F;template_movie*</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ElasticSearch/">ElasticSearch</a></div><div class="post_share"></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/05/17/14.docker%20%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E8%BD%AF%E4%BB%B6/" title="Docker搭建基础镜像"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">Docker搭建基础镜像</div></div></a></div><div><a href="/2022/05/08/7.docker%20%E5%AE%89%E8%A3%85%E7%89%88%E6%9C%AC8.1.3%E7%9A%84es%E5%92%8CKibana/" title="Docker安装ElasticSearch和Kibana [8.1.3]"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-08</div><div class="title">Docker安装ElasticSearch和Kibana [8.1.3]</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST%E5%92%8CPUT%E5%8C%BA%E5%88%AB"><span class="toc-text">POST和PUT区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B9%E6%8D%AE%E4%B8%BB%E9%94%AE%E4%BF%9D%E8%AF%81%E5%B9%82%E7%AD%89%E6%80%A7"><span class="toc-text">1. 根据主键保证幂等性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%89%B9%E9%87%8F%E6%B7%BB%E5%8A%A0%E4%B8%A4%E4%B8%AAdocument"><span class="toc-text">2. 批量添加两个document</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aggs-%E8%81%9A%E5%90%88"><span class="toc-text">aggs 聚合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#term-%E7%B2%BE%E5%87%86%E5%8C%B9%E9%85%8D"><span class="toc-text">term  精准匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#terms-%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%8C%E7%9B%B8%E5%BD%93%E4%BA%8EgroupBy"><span class="toc-text">terms 聚合操作，相当于groupBy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#myAggs%E6%98%AF%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%9A%8F%E6%84%8F%E5%8F%96"><span class="toc-text">myAggs	是聚合操作的名字，可以随意取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%8B%B1%E6%96%87%E9%BB%98%E8%AE%A4%E5%88%86%E8%AF%8D%E8%A7%84%E5%88%99"><span class="toc-text">1. 英文默认分词规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%AD%E6%96%87%E9%BB%98%E8%AE%A4%E5%88%86%E8%AF%8D%E8%A7%84%E5%88%99"><span class="toc-text">2. 中文默认分词规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%87%AA%E5%8A%A8%E5%AE%9A%E4%B9%89mapping"><span class="toc-text">3. 自动定义mapping</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 一只草履虫</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://fastly.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://fastly.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://fastly.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'bBtQVBbzW7eDs5d0zHYEbyYi-gzGzoHsz',
+      appKey: '8JbhJ2dhlVdotOn2sS6AXotb',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://fastly.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="255,255,255" opacity="1" zIndex="-1" count="99" mobile="false" src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="Java,C,C艹,C#,Python,GO,PHP,Ruby,SQL,Curl,JavaScript,HTML,XML,R,Lua,Scala,Erlang,Perl,Swift,Objective-C,Visual Basic,Lisp" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

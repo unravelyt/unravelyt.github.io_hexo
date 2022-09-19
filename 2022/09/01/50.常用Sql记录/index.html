@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="default" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>常用Sql记录 | Unravely</title><meta name="keywords" content="DataBase"><meta name="author" content="一只草履虫"><meta name="copyright" content="一只草履虫"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="12345678找出前缀为qr的所有数据库SELECT	CONCAT(&amp;#x27;drop table &amp;#x27;,table_name,&amp;#x27;;&amp;#x27;)FROM	information_schema. TABLESWHERE	table_name LIKE &amp;#x27;qr_%&amp;#x27;;      mysql不同时间粒度下的分组统计我们在做项目或者数据分析时，经常遇到这样的需求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用Sql记录">
+<meta property="og:url" content="http://example.com/2022/09/01/50.%E5%B8%B8%E7%94%A8Sql%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Unravely">
+<meta property="og:description" content="12345678找出前缀为qr的所有数据库SELECT	CONCAT(&amp;#x27;drop table &amp;#x27;,table_name,&amp;#x27;;&amp;#x27;)FROM	information_schema. TABLESWHERE	table_name LIKE &amp;#x27;qr_%&amp;#x27;;      mysql不同时间粒度下的分组统计我们在做项目或者数据分析时，经常遇到这样的需求">
+<meta property="og:locale">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-09-01T07:46:14.515Z">
+<meta property="article:modified_time" content="2022-09-19T11:29:53.128Z">
+<meta property="article:author" content="一只草履虫">
+<meta property="article:tag" content="DataBase">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="https://cdn.staticaly.com/gh/unravelyt/image-hosting/master/base_img/logo_y.webp"><link rel="canonical" href="http://example.com/2022/09/01/50.%E5%B8%B8%E7%94%A8Sql%E8%AE%B0%E5%BD%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":700},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '常用Sql记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-19 19:29:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom-css/head.css"><meta name="generator" content="Hexo 6.0.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.staticaly.com/gh/unravelyt/image-hosting/master/base_img/avatar.4zr2jgjmhq80.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">53</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">62</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Unravely</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">常用Sql记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-09-01T07:46:14.515Z" title="Created 2022-09-01 15:46:14">2022-09-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-09-19T11:29:53.128Z" title="Updated 2022-09-19 19:29:53">2022-09-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/4-%E5%90%84%E7%A7%8D%E5%A4%87%E5%BF%98/">4.各种备忘</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">找出前缀为qr的所有数据库</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	CONCAT(<span class="string">&#x27;drop table &#x27;</span>,table_name,<span class="string">&#x27;;&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	information_schema. TABLES</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	table_name <span class="keyword">LIKE</span> <span class="string">&#x27;qr_%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="mysql不同时间粒度下的分组统计"><a href="#mysql不同时间粒度下的分组统计" class="headerlink" title="mysql不同时间粒度下的分组统计"></a>mysql不同时间粒度下的分组统计</h1><p>我们在做项目或者数据分析时，经常遇到这样的需求：统计不同时间粒度下的数据分布情况，例如，每一天中每个小时网站的访问量，某路口每半个小时通过的车辆数量等。对于此类的问题，一个sql简单的查询就能实现，故特此记录下，方便以后使用。<br>在MySQL中，我的表为：track<br>数据结构如下所示：<br><img src="https://img-blog.csdnimg.cn/20181105163738204.png" alt="表track的数据结构示意"></p>
+<h2 id="按天统计"><a href="#按天统计" class="headerlink" title="按天统计"></a>按天统计</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="type">DATE</span>(TimeStart) <span class="keyword">AS</span> <span class="type">date</span>, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> num</span><br><span class="line"><span class="keyword">FROM</span> track</span><br><span class="line"><span class="keyword">WHERE</span> Flag <span class="operator">=</span> <span class="number">0</span> <span class="keyword">AND</span> Duration <span class="operator">&gt;=</span> <span class="number">300</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="type">date</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="type">date</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="按小时统计"><a href="#按小时统计" class="headerlink" title="按小时统计"></a>按小时统计</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DATE_FORMAT(TimeStart, <span class="string">&#x27;%Y-%m-%d %H:00:00&#x27;</span>) <span class="keyword">AS</span> <span class="type">time</span>, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> num</span><br><span class="line"><span class="keyword">FROM</span> track</span><br><span class="line"><span class="keyword">WHERE</span> Flag <span class="operator">=</span> <span class="number">0</span> <span class="keyword">AND</span> Duration <span class="operator">&gt;=</span> <span class="number">300</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="type">time</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="type">time</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果如下：<br><img src="https://img-blog.csdnimg.cn/20181105164437450.png" alt="一小时结果"></p>
+<h2 id="按半小时统计"><a href="#按半小时统计" class="headerlink" title="按半小时统计"></a>按半小时统计</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="type">time</span>, <span class="built_in">COUNT</span>( <span class="operator">*</span> ) <span class="keyword">AS</span> num </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	(</span><br><span class="line">	<span class="keyword">SELECT</span> Duration,</span><br><span class="line">		DATE_FORMAT(</span><br><span class="line">			concat( <span class="type">date</span>( TimeStart ), <span class="string">&#x27; &#x27;</span>, <span class="keyword">HOUR</span> ( TimeStart ), <span class="string">&#x27;:&#x27;</span>, <span class="built_in">floor</span>( <span class="keyword">MINUTE</span> ( TimeStart ) <span class="operator">/</span> <span class="number">30</span> ) <span class="operator">*</span> <span class="number">30</span> ),</span><br><span class="line">			<span class="string">&#x27;%Y-%m-%d %H:%i&#x27;</span> </span><br><span class="line">		) <span class="keyword">AS</span> <span class="type">time</span> </span><br><span class="line">	<span class="keyword">FROM</span> tarck</span><br><span class="line">	<span class="keyword">WHERE</span> Flag <span class="operator">=</span> <span class="number">0</span>  <span class="keyword">AND</span> Duration <span class="operator">&gt;=</span> <span class="number">300</span> </span><br><span class="line">	) a </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> DATE_FORMAT( <span class="type">time</span>, <span class="string">&#x27;%Y-%m-%d %H:%i&#x27;</span> ) </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="type">time</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果如下：<br><img src="https://img-blog.csdnimg.cn/20181105164102966.png" alt="半小时查询结果"></p>
+<h2 id="按N分钟统计"><a href="#按N分钟统计" class="headerlink" title="按N分钟统计"></a>按N分钟统计</h2><p>将上面的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=SQL%E8%AF%AD%E5%8F%A5&spm=1001.2101.3001.7020">SQL语句</a>稍微修改下，就可以实现按任意N分钟为时间片的分组统计，如按10分钟统计，先上代码：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="type">time</span>, <span class="built_in">COUNT</span>( <span class="operator">*</span> ) <span class="keyword">AS</span> num </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	(</span><br><span class="line">	<span class="keyword">SELECT</span> Duration,</span><br><span class="line">		DATE_FORMAT(</span><br><span class="line">			concat( <span class="type">date</span>( TimeStart ), <span class="string">&#x27; &#x27;</span>, <span class="keyword">HOUR</span> ( TimeStart ), <span class="string">&#x27;:&#x27;</span>, <span class="built_in">floor</span>( <span class="keyword">MINUTE</span> ( TimeStart ) <span class="operator">/</span> <span class="number">10</span> ) <span class="operator">*</span> <span class="number">10</span> ),</span><br><span class="line">			<span class="string">&#x27;%Y-%m-%d %H:%i&#x27;</span> </span><br><span class="line">		) <span class="keyword">AS</span> <span class="type">time</span> </span><br><span class="line">	<span class="keyword">FROM</span> tarck</span><br><span class="line">	<span class="keyword">WHERE</span> Flag <span class="operator">=</span> <span class="number">0</span>  <span class="keyword">AND</span> Duration <span class="operator">&gt;=</span> <span class="number">300</span> </span><br><span class="line">	) a </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> DATE_FORMAT( <span class="type">time</span>, <span class="string">&#x27;%Y-%m-%d %H:%i&#x27;</span> ) </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="type">time</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>基本思路：<br>将datetime类型的时间转化为相应时间片的时间，例如将‘2017-03-01 01:08:19’ 转化为‘2017-03-01 01:00:00’，然后group by即可。</p>
+<h2 id="按分钟统计"><a href="#按分钟统计" class="headerlink" title="按分钟统计"></a>按分钟统计</h2><p>将按小时统计的SQL语句稍微修改下，就可以实现按分钟统计</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DATE_FORMAT(TimeStart, <span class="string">&#x27;%Y-%m-%d %H:%i:00&#x27;</span>) <span class="keyword">AS</span> <span class="type">time</span>, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> num</span><br><span class="line"><span class="keyword">FROM</span> track </span><br><span class="line"><span class="keyword">WHERE</span> Flag <span class="operator">=</span> <span class="number">0</span> <span class="keyword">AND</span> Duration <span class="operator">&gt;=</span> <span class="number">300</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="type">time</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="type">time</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>DATE_FORMAT功能强大，可以根据format字符串格式化date值，参考下面链接<br><a target="_blank" rel="noopener" href="http://www.w3school.com.cn/sql/func_date_format.asp">http://www.w3school.com.cn/sql/func_date_format.asp</a></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DataBase/">DataBase</a></div><div class="post_share"></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/08/04/43.H2%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/" title="H2数据库使用和配置"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-04</div><div class="title">H2数据库使用和配置</div></div></a></div><div><a href="/2022/08/21/46.pgsql%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%BA%8F%E5%88%97/" title="pgsql自动创建序列"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-21</div><div class="title">pgsql自动创建序列</div></div></a></div><div><a href="/2022/08/23/47.%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/" title="数据库索引使用方式"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-23</div><div class="title">数据库索引使用方式</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql%E4%B8%8D%E5%90%8C%E6%97%B6%E9%97%B4%E7%B2%92%E5%BA%A6%E4%B8%8B%E7%9A%84%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1"><span class="toc-text">mysql不同时间粒度下的分组统计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E5%A4%A9%E7%BB%9F%E8%AE%A1"><span class="toc-text">按天统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E5%B0%8F%E6%97%B6%E7%BB%9F%E8%AE%A1"><span class="toc-text">按小时统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E5%8D%8A%E5%B0%8F%E6%97%B6%E7%BB%9F%E8%AE%A1"><span class="toc-text">按半小时统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89N%E5%88%86%E9%92%9F%E7%BB%9F%E8%AE%A1"><span class="toc-text">按N分钟统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E5%88%86%E9%92%9F%E7%BB%9F%E8%AE%A1"><span class="toc-text">按分钟统计</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 一只草履虫</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://fastly.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://fastly.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://fastly.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'bBtQVBbzW7eDs5d0zHYEbyYi-gzGzoHsz',
+      appKey: '8JbhJ2dhlVdotOn2sS6AXotb',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://fastly.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="255,255,255" opacity="1" zIndex="-1" count="99" mobile="false" src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="Java,C,C艹,C#,Python,GO,PHP,Ruby,SQL,Curl,JavaScript,HTML,XML,R,Lua,Scala,Erlang,Perl,Swift,Objective-C,Visual Basic,Lisp" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
