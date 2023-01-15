@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Thread图示</title>
+      <link href="/2023/01/15/Thread%E5%9B%BE%E7%A4%BA/"/>
+      <url>/2023/01/15/Thread%E5%9B%BE%E7%A4%BA/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2476458/1670074558219-b303b031-4859-4a71-9c09-18af27fa8c14.png?x-oss-process=image/resize,w_1125,limit_0" alt="thread体系.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 2.代码相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> Thread </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CountDownLatch使用</title>
       <link href="/2023/01/15/CountDownLatch%E4%BD%BF%E7%94%A8/"/>
       <url>/2023/01/15/CountDownLatch%E4%BD%BF%E7%94%A8/</url>
