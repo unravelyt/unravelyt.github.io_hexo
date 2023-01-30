@@ -4,11 +4,38 @@
   
     
     <entry>
+      <title>部署Picx图床</title>
+      <link href="/2023/01/30/%E9%83%A8%E7%BD%B2Picx%E5%9B%BE%E5%BA%8A/"/>
+      <url>/2023/01/30/%E9%83%A8%E7%BD%B2Picx%E5%9B%BE%E5%BA%8A/</url>
+      
+        <content type="html"><![CDATA[<p>根据 <a href="https://blog.csdn.net/wbsu2004/article/details/121154470">免费的GitHub图床PicX</a> 整理，替换镜像源</p><h1 id="1-下载代码"><a href="#1-下载代码" class="headerlink" title="1. 下载代码"></a>1. 下载代码</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/XPoet/picx.git</span><br><span class="line"></span><br><span class="line">cd picx</span><br></pre></td></tr></table></figure><h1 id="2-创建dockerfile文件"><a href="#2-创建dockerfile文件" class="headerlink" title="2 创建dockerfile文件"></a>2 创建dockerfile文件</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># build stage</span></span><br><span class="line"><span class="keyword">FROM</span> node:lts-alpine as build-stage</span><br><span class="line"><span class="keyword">LABEL</span><span class="language-bash"> maintainer=unravely&lt;xxxx@163.com&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package*.json ./</span></span><br><span class="line"><span class="comment">#这里用淘宝镜像，不然会卡住</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install -g cnpm --registry=https://registry.npm.taobao.org</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> cnpm install</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> cnpm install pm2 -g</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm run build</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># production stage</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:stable-alpine as production-stage</span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=build-stage /app/dist /usr/share/nginx/html</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;nginx&quot;</span>, <span class="string">&quot;-g&quot;</span>, <span class="string">&quot;daemon off;&quot;</span>]</span></span><br></pre></td></tr></table></figure><h1 id="3-构建镜像"><a href="#3-构建镜像" class="headerlink" title="3. 构建镜像"></a>3. 构建镜像</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t unravely/pixc:v1 .</span><br></pre></td></tr></table></figure><h1 id="4-启动服务"><a href="#4-启动服务" class="headerlink" title="4. 启动服务"></a>4. 启动服务</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -d --name=picx --restart=always -p 3480:80 unravely/pixc:v1</span></span><br></pre></td></tr></table></figure><h1 id="5-访问"><a href="#5-访问" class="headerlink" title="5.访问"></a>5.访问</h1><p>访问地址：<a href="http://ip:3480/">http://ip:3480</a></p><h1 id="ps："><a href="#ps：" class="headerlink" title="ps："></a>ps：</h1><p>也可以直接去(<a href="https://hub.docker.com/search?type=image">Docker Hub</a>)搜索<code>pixc</code>，直接拉取镜像，然后运行；</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 3.环境搭建 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Docker </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Thread图示</title>
       <link href="/2023/01/15/Thread%E5%9B%BE%E7%A4%BA/"/>
       <url>/2023/01/15/Thread%E5%9B%BE%E7%A4%BA/</url>
       
-        <content type="html"><![CDATA[<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2476458/1670074558219-b303b031-4859-4a71-9c09-18af27fa8c14.png?x-oss-process=image/resize,w_1125,limit_0" alt="thread体系.png"></p>]]></content>
+        <content type="html"><![CDATA[<p><img src="https://jsd.cdn.zzko.cn/gh/unravelyt/image-hosting@master/2023/thread%E4%BD%93%E7%B3%BB.31jhztjydfs0.webp" alt="thread体系.png"></p>]]></content>
       
       
       <categories>
